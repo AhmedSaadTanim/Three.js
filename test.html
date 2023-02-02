@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>testing</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <script src="js/three.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const renderer = new THREE.WebGLRenderer();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        let light;
+        let mesh;
+
+        function init(){
+            scene.background = new THREE.Color('black');
+            camera.position.set(0,10,20);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+        }
+
+        function setLight(){
+            light = new THREE.AmbientLight(0xffffff);
+            scene.add(light);
+        }
+
+        function loadGLTF(){
+            let loader = new THREE.GLTFLoader();
+
+            loader.load('Audi R8.gltf', (gltf) => {
+                mesh = gltf.scene;
+                scene.add(mesh);
+                mesh.setPosition(0, 10, 15);
+            })
+        }
+
+        init();
+        setLight();
+        loadGLTF();
+
+    </script>
+</body>
+
+</html>
