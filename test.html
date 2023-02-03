@@ -17,14 +17,14 @@
 	<script>
 		const scene = new THREE.Scene();
 		const renderer = new THREE.WebGLRenderer();
-		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
 
 		let light;
 		let mesh;
 
 		function init() {
 			scene.background = new THREE.Color('white');  
-			camera.position.set(0, 10, 20);
+			camera.position.set(-10, 10, 20);
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			document.body.appendChild(renderer.domElement);
 		}
@@ -38,24 +38,26 @@
 		function loadGLTF() {
 			let loader = new THREE.GLTFLoader();
 
-			loader.load('Audi R8.gltf', (gltf) => {
+			loader.load('Mclaren.gltf', (gltf) => {
 				mesh = gltf.scene;
 				scene.add(mesh);
-				// mesh.setPosition(0, 10, 15);
+				mesh.position.x = -10;
+				mesh.position.y = 8;
+				mesh.position.z = 10;
 			})
 		}
 
-		
-		init();
-		setLight();
-		loadGLTF();
-
-
 		function animate() {
 			requestAnimationFrame(animate);
+			if(mesh && mesh.rotation){
+				mesh.rotation.y -= 0.005;
+			}
 			renderer.render(scene, camera);
 		}
 
+		init();
+		setLight();
+		loadGLTF();
 		animate()
 	</script>
 </body>
