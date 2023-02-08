@@ -28,7 +28,7 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 // add axis
 const axesHelper = new THREE.AxesHelper(500);
-axesHelper.position.set(0, 3, 0);
+// axesHelper.position.set(0, 3, 0);
 scene.add(axesHelper);
 
 // MAKE_SPOTLIGHT([0, 20, -19], 0.5)
