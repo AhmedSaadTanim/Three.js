@@ -3,6 +3,7 @@ import initDemoCar from './assets/democar.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { LOAD_GARAGE, LOAD_CARS } from './utils/assets_exporter.js';
 import { MAKE_SPOTLIGHT } from './utils/util.js';
+import init_demo_ground from './assets/demo_ground.js';
 
 
 const scene = new THREE.Scene();
@@ -33,7 +34,7 @@ scene.add(axesHelper);
 
 // MAKE_SPOTLIGHT([0, 20, -19], 0.5)
 // MAKE_SPOTLIGHT([0, 20, 20], 0.2)
-
+init_demo_ground(scene)
 initDemoCar(scene)
 // LOAD_GARAGE({
 // 	path: 'assets/garage.glb',
