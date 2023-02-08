@@ -1,3 +1,4 @@
+import * as THREE from 'three'; 
 export default (scene) => {
 	const geometry = new THREE.BufferGeometry();
 	// create a simple square shape. We duplicate the top left and bottom right
