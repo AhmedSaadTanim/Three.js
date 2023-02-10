@@ -1,3 +1,5 @@
+import * as THREE from 'three'; 
+
 const MAKE_SPOTLIGHT = function ([x, y, z],intensity) {
 	const spotLight = new THREE.SpotLight(0xffffff, intensity); 
 	spotLight.penumbra = 0.5;
