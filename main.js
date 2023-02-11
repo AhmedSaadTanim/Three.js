@@ -35,8 +35,8 @@ const axesHelper = new THREE.AxesHelper(500);
 // axesHelper.position.set(0, 3, 0);
 scene.add(axesHelper);
 
-MAKE_SPOTLIGHT([0, 20, -19], 0.5)
-MAKE_SPOTLIGHT([0, 20, 20], 0.2)
+MAKE_SPOTLIGHT([0, 20, -19], 0.5, scene)
+MAKE_SPOTLIGHT([0, 20, 20], 0.2, scene)
 
 LOAD_GARAGE({
 	path: 'assets/garage.glb',
