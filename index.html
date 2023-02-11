@@ -16,12 +16,77 @@
 			height: 100%;
 		}
 
+		/* import MenuFont.otf */
+		@font-face {
+			font-family: 'MenuFont';
+			src: url('assets/fonts/MenuFont.otf');
+		}
 
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#ui-screen-intro {
+			position: absolute;
+			/* background-color: rgb(95, 95, 95); */
+			color: rgb(197, 3, 3);
+			padding: 30px;
+			border-radius: 10px;
+			top: 50px;
+			left: 50px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		#ui-screen-intro .container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 20px;
+		}
+
+		#ui-screen-intro div,
+		#ui-screen-intro option,
+		#car-selection,
+		.button-container,
+		button {
+			font-size: 30px;
+			font-family: "MenuFont";
+			width: 100%;
+			border-radius: 10px;
+		}
 	</style>
+
+	<link rel="stylesheet" href="lib/dat.gui.css">
 </head>
 
 <body>
-	<button>Animate</button> 
+	<!-- make ui elements  -->
+	<div id="ui-screen-intro">
+		<div class="container">
+			<!-- make a car dropdown  -->
+			<h1>SELECT YOUR CAR!</h1>
+			<select id="car-selection">
+				<option value="centenario">Centenario</option>
+				<option value="f50">F50</option>
+				<option value="ferzor">Ferzor</option>
+				<option value="senna">Senna</option>
+			</select>
+			<button>
+				TEST DRIVE
+			</button>
+			<button>
+				LETS RACE!
+			</button>
+
+		</div>
+	</div>
+
+
+	<script async src="lib/dat.gui.min.js"></script>
 	<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
 
 	<script type="importmap">
@@ -34,6 +99,6 @@
 	</script>
 
 	<script type="module" src="main.js"></script>
-</body> 
+</body>
 
 </html>
