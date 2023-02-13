@@ -70,17 +70,17 @@
 			<!-- make a car dropdown  -->
 			<h1>SELECT YOUR CAR!</h1>
 			<select id="car-selection">
+				<option value="senna">Senna</option>
 				<option value="centenario">Centenario</option>
 				<option value="f50">F50</option>
 				<option value="ferzor">Ferzor</option>
-				<option value="senna">Senna</option>
 			</select>
-			<button>
+			<button id="test-drive">
 				TEST DRIVE
 			</button>
-			<button>
+			<!-- <button>
 				LETS RACE!
-			</button>
+			</button> -->
 
 		</div>
 	</div>
@@ -92,9 +92,11 @@
 	<script type="importmap">
 			{
 				"imports": {
-				"three": "https://unpkg.com/three@latest/build/three.module.js",
-				"three/addons/": "https://unpkg.com/three@latest/examples/jsm/"
-				} 
+					"cannon-es" : "https://unpkg.com/cannon-es/dist/cannon-es.js",
+					"cannon-es-debugger": "https://unpkg.com/cannon-es-debugger/dist/cannon-es-debugger.js", 
+					"three": "https://unpkg.com/three@latest/build/three.module.js",
+					"three/addons/": "https://unpkg.com/three@latest/examples/jsm/"
+				}
 			}
 	</script>
 
