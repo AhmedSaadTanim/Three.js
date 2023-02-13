@@ -161,7 +161,7 @@ document.getElementById('test-drive').addEventListener('click', async () => {
 
 	// add cannon car
 	const car_chassis = new CANNON.Body({
-		mass: 950,
+		mass: 5000,
 		position: new CANNON.Vec3(0, 6, 0),
 		shape: new CANNON.Box(new CANNON.Vec3(3.1, 0.64, 1.4)),
 	})
@@ -298,6 +298,57 @@ document.getElementById('test-drive').addEventListener('click', async () => {
 		phi = Math.PI / 4 + dy / height * Math.PI / 2;
 	};
 
+	//cam controls
+	let trackerPosition = [
+		[0.5, 1.3, 0],
+		[0, 3, -6],
+		[0, 3, 6],
+	];
+
+	let trackerRotation = [
+		[9.6, 12.6, -3.2],
+		[-2.9, -0.05, -3.13],
+		[0, 0, 0],
+	]
+	
+	let counter = 0;
+	camera.position.set(trackerPosition[0][0], trackerPosition[0][1], trackerPosition[0][2]);
+	camera.rotation.set(trackerRotation[0][0], trackerRotation[0][1], trackerRotation[0][2]);
+
+	function setupKeyControls() {
+        document.onkeydown = function(e) {
+          if(e.key == 'v'){
+			counter = counter + 1;
+			if(trackerPosition.length <= counter)
+				counter = 0;
+			
+			camera.position.set(trackerPosition[counter][0], trackerPosition[counter][1], trackerPosition[counter][2]);
+			camera.rotation.set(trackerRotation[counter][0], trackerRotation[counter][1], trackerRotation[counter][2])
+		  }
+		  //debug
+		  if(e.key == 'u'){
+			camera.rotation.x += 0.1;
+		  }
+		  else if(e.key == 'i'){
+			camera.rotation.y += 0.1;
+		  }
+		  else if(e.key == 'o'){
+			camera.rotation.z += 0.1;
+		  }
+		  else if(e.key == 'j'){
+			camera.rotation.x -= 0.1;
+		  }
+		  else if(e.key == 'k'){
+			camera.rotation.y -= 0.1;
+		  }
+		  else if(e.key == 'l'){
+			camera.rotation.z -= 0.1;
+		  }
+		  console.log(camera.rotation);
+        };
+      }
+
+    setupKeyControls();
 	const func = () => {
 		if (car && car_wheel_list.length === 4) {
 			car.position.copy(car_chassis.position)
@@ -312,12 +363,19 @@ document.getElementById('test-drive').addEventListener('click', async () => {
 			})
 
 			// follow camera
+			
 
-			camera.position.x = car.position.x + radius * Math.sin(phi) * Math.cos(theta);
-			camera.position.y = car.position.y + radius * Math.cos(phi);
-			camera.position.z = car.position.z + radius * Math.sin(phi) * Math.sin(theta);
+			const car_tracker = new THREE.Object3D();
+			car_tracker.name = "carCam";
+			car.add(car_tracker);
+			car_tracker.add(camera);
 
-			camera.lookAt(car.position);
+			// camera.position.set(trackerPosition[0][0], trackerPosition[0][1], trackerPosition[0][2]);
+			// camera.position.x = car.position.x + radius * Math.sin(phi) * Math.cos(theta);
+			// camera.position.y = car.position.y + radius * Math.cos(phi);
+			// camera.position.z = car.position.z + radius * Math.sin(phi) * Math.sin(theta);
+
+			// camera.lookAt(car.position);
 		}
 
 		requestAnimationFrame(func)
