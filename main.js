@@ -14,7 +14,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// new OrbitControls(camera, renderer.domElement);
+new OrbitControls(camera, renderer.domElement);
 
 renderer.outputEncoding = THREE.sRGBEncoding  //gamma correction
 const initial_camera_props = {
@@ -151,11 +151,20 @@ car_list.dispatchEvent(new Event('change'))
 
 document.getElementById('test-drive').addEventListener('click', async () => {
 	scene.remove(scene.getObjectByName('garage'))
+	new GLTFLoader().load('assets/racetrack.glb', (gltf) => {
+		scene.add(gltf.scene) 
+	})
+	//add a directional light
+	const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+	directionalLight.position.set(0, 10, 0);
+	directionalLight.castShadow = true;
+	scene.add(directionalLight);
+	
+
 	const car_props = scene.getObjectByName('car ' + car_list.value)
 	let car_path = car_props.userData.drive_path
 	let wheel_path = car_props.userData.wheel_path
-	console.log(car_path)
-	console.log(wheel_path)
+
 	scene.remove(car_props)
 	document.getElementById('ui-screen-intro').style.display = 'none'
 
@@ -344,7 +353,6 @@ document.getElementById('test-drive').addEventListener('click', async () => {
 		  else if(e.key == 'l'){
 			camera.rotation.z -= 0.1;
 		  }
-		  console.log(camera.rotation);
         };
       }
 
