@@ -201,7 +201,7 @@ document.getElementById('test-drive').addEventListener('click', async () => {
 
 	document.addEventListener('keydown', (e) => {
 		const speed = vehicle.chassisBody.velocity.length();
-		let maxSteerVal = Math.PI / 16
+		let maxSteerVal = Math.PI / 8
 
 		const maxForce = 3000
 
