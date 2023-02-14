@@ -14,7 +14,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-new OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 
 renderer.outputEncoding = THREE.sRGBEncoding  //gamma correction
 const initial_camera_props = {
@@ -34,6 +34,20 @@ window.addEventListener('resize', () => {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 })
+
+//adding skybox
+const loader = new THREE.CubeTextureLoader();
+loader.setPath('assets/textures/skybox/');
+const texture = loader.load([
+    'Daylight Box_Right.bmp',
+    'Daylight Box_Left.bmp',
+    'Daylight Box_Top.bmp',
+    'Daylight Box_Bottom.bmp',
+    'Daylight Box_Front.bmp',
+    'Daylight Box_Back.bmp',
+]);
+
+scene.background = texture;
 
 // initiate cannon world
 const world = new CANNON.World({
@@ -280,34 +294,7 @@ document.getElementById('test-drive').addEventListener('click', async () => {
 		})
 	})
 
-
-
-	let radius = 10;
-	let theta = Math.PI / 4;
-	let phi = Math.PI / 4;
-	let mousedown = false;
-
-	document.onmousedown = () => {
-		mousedown = true;
-	};
-
-	document.onmouseup = () => {
-		mousedown = false;
-	};
-
-	document.onmousemove = (e) => {
-		if (!mousedown) return;
-		const x = e.clientX;
-		const y = e.clientY;
-		const width = window.innerWidth;
-		const height = window.innerHeight;
-		const dx = x - width / 2;
-		const dy = y - height / 2;
-		theta = Math.PI / 4 + dx / width * Math.PI / 2;
-		phi = Math.PI / 4 + dy / height * Math.PI / 2;
-	};
-
-	//cam controls
+	// cam controls
 	let trackerPosition = [
 		[0.5, 1.3, 0],
 		[0, 3, -6],
@@ -355,7 +342,7 @@ document.getElementById('test-drive').addEventListener('click', async () => {
 		  }
         };
       }
-
+	
     setupKeyControls();
 	const func = () => {
 		if (car && car_wheel_list.length === 4) {
@@ -371,7 +358,7 @@ document.getElementById('test-drive').addEventListener('click', async () => {
 			})
 
 			// follow camera
-			
+			// controls.target = car.position;
 
 			const car_tracker = new THREE.Object3D();
 			car_tracker.name = "carCam";
@@ -384,10 +371,10 @@ document.getElementById('test-drive').addEventListener('click', async () => {
 			// camera.position.z = car.position.z + radius * Math.sin(phi) * Math.sin(theta);
 
 			// camera.lookAt(car.position);
+			
 		}
 
 		requestAnimationFrame(func)
-		// console.log(vehicle) 
 	}
 	func()
 
