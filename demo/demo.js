@@ -16,12 +16,12 @@ let isMouseDown = false;
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-const controls = new OrbitControls(camera, renderer.domElement);
+// const controls = new OrbitControls(camera, renderer.domElement);
 renderer.outputEncoding = THREE.sRGBEncoding  //gamma correction
 
 const animate = function () {
 	requestAnimationFrame(animate);
-	controls.update();
+	// controls.update();
 
 	if(isMouseHold){
 		setupMouseControls(scene, button);
@@ -33,7 +33,6 @@ const animate = function () {
 		scene.getObjectByName('wheel3').rotation.y += 0.1;
 		scene.getObjectByName('wheel4').rotation.y += 0.1; 
 	}
-	renderer.render(scene, camera);
 }
 camera.position.set(0, 2, 0)
 animate()
@@ -49,7 +48,8 @@ scene.add(axesHelper);
 
 // MAKE_SPOTLIGHT([0, 20, -19], 0.5)
 // MAKE_SPOTLIGHT([0, 20, 20], 0.2)
-init_demo_ground(scene,initDemoCar(scene));
+initDemoCar(scene)
+init_demo_ground(scene, renderer);
 document.querySelector('button').addEventListener('click', ()=>{ 
 	rotate_wheel = !rotate_wheel; 
 })
