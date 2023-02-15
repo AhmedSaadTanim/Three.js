@@ -184,7 +184,7 @@ document.getElementById('test-drive').addEventListener('click', async () => {
 
 	// add cannon car
 	const car_chassis = new CANNON.Body({
-		mass: 5000,
+		mass: 3500,  
 		position: new CANNON.Vec3(0, 6, 0),
 		shape: new CANNON.Box(new CANNON.Vec3(3.1, 0.64, 1.4)),
 	})
@@ -291,6 +291,10 @@ document.getElementById('test-drive').addEventListener('click', async () => {
 			car_wheel_list.push(wheel2)
 			car_wheel_list.push(wheel3)
 			car_wheel_list.push(wheel4)
+
+			let audio = new Audio('assets/car.wav')
+			audio.loop = true
+			audio.play() 
 		})
 	})
 
