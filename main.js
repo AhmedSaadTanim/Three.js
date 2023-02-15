@@ -88,7 +88,7 @@ renderer.shadowMap.height = 2048
 
 // add axis
 const axesHelper = new THREE.AxesHelper(500);
-scene.add(axesHelper);
+// scene.add(axesHelper);
 
 MAKE_SPOTLIGHT([0, 20, 12.25], 0.45, scene)
 MAKE_SPOTLIGHT([-12, 20, -23], 0.7, scene)

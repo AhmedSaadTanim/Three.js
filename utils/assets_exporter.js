@@ -70,7 +70,6 @@ const LOAD_CAR = (car, scene, lookAt = null) => {
 		if(car.wheel_path){
 			gltf.scene.userData.wheel_path = car.wheel_path
 		}
-		
 		scene.add(gltf.scene);
 
 		// const cubeFolder = gui.addFolder(car.name)
